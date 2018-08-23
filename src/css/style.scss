@@ -1,0 +1,46 @@
+@import "config";
+// @import "container";
+// @import "search";
+@import "contactCard";
+// @import "sidebar";
+// @import "form";
+@import "display";
+@import "notFound";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @include background;
+  background: $gradient;
+}
+
+#load {
+  color: #999999;
+  background: transparent;
+  border: none;
+  outline: inherit;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+    color: #bababa;
+  }
+}
+
+.personCard {
+  top: 0px;
+  left: 30%;
+  position: absolute;
+  background: #5f4949;
+  width: 50%;
+  height: 560px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: -1;
+}
+
+#contacts {
+  overflow: inherit;
+}
