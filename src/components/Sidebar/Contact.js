@@ -1,36 +1,30 @@
 import React, { Component } from "react";
+import ContactCard from "./ContactCard";
 
 export class Contact extends Component {
-  showCard = () => {
-    alert("Twat");
+  onToggle = () => {
+    this.props.onToggle(this.props.index);
   };
 
   render() {
-    const {
-      firstName,
-      lastName,
-      avatar,
-      email,
-      phone,
-      country
-    } = this.props.details;
+    const { firstName, lastName, avatar } = this.props.details;
     return (
       <React.Fragment>
-        <li className="person" onClick={this.showCard}>
-          <span className="avatar">
+        <li className="person" onClick={this.onToggle}>
+          <div className="avatar">
             <img src={avatar} alt={`${firstName} ${lastName}`} />
-          </span>
-          <span className="info">
-            <span className="name">
-              {firstName} {lastName}
-            </span>
-          </span>
-        </li>
-        <div className="personCard">
-          <h1>
+          </div>
+          <div className="name">
             {firstName} {lastName}
-          </h1>
-        </div>
+          </div>
+        </li>
+        {this.props.state.selections === this.props.index ? (
+          <ContactCard
+            details={this.props.details}
+            index={this.props.index}
+            goToEdit={this.props.goToEdit}
+          />
+        ) : null}
       </React.Fragment>
     );
   }

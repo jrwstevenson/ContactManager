@@ -8,11 +8,8 @@ export class Sidebar extends Component {
     return (
       <div className="sidebar">
         <Search />
-        <Navbar
-          history={this.props.history}
-          importContacts={this.props.importContacts}
-        />
-        <Contacts contacts={this.props.contacts} />
+        <Navbar />
+        <Contacts />
       </div>
     );
   }

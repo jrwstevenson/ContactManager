@@ -1,24 +1,26 @@
 import React, { Component } from "react";
+import { Consumer } from "../../context";
+import history from "../History";
 
 class Navbar extends Component {
-  goToAdd = () => {
-    this.props.history.push("/contact/add");
-  };
-
   render() {
     return (
-      <nav className="contacts-nav">
-        <ul>
-          <li className="active">
-            <a onClick={this.goToAdd}>Add Contact</a>
-          </li>
-          <li>
-            <button onClick={this.props.importContacts} id="load">
-              Load Sample Contacts
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <Consumer>
+        {context => (
+          <nav className="contacts-nav">
+            <ul>
+              <li className="active">
+                <a onClick={() => history.push("/contact/add")}>Add Contact</a>
+              </li>
+              <li>
+                <button onClick={context.importContacts} id="load">
+                  Load Sample Contacts
+                </button>
+              </li>
+            </ul>
+          </nav>
+        )}
+      </Consumer>
     );
   }
 }

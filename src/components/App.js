@@ -6,11 +6,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Sidebar
-          history={this.props.history}
-          importContacts={this.props.importContacts}
-          contacts={this.props.contacts}
-        />
+        <Sidebar />
         <Display />
       </React.Fragment>
     );
