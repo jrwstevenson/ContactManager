@@ -1,7 +1,3 @@
-{Object.keys(this.state.contacts).map(key => (
-<Contact key={key} />
-))}
-
 # The Gaming Innovation Group JavaScript Challenge
 
 ## Client Side Address Book

@@ -11,20 +11,21 @@ export class Contact extends Component {
     return (
       <React.Fragment>
         <li className="person" onClick={this.onToggle}>
-          <div className="avatar">
-            <img src={avatar} alt={`${firstName} ${lastName}`} />
-          </div>
-          <div className="name">
-            {firstName} {lastName}
-          </div>
-        </li>
-        {this.props.state.selections === this.props.index ? (
-          <ContactCard
-            details={this.props.details}
-            index={this.props.index}
-            goToEdit={this.props.goToEdit}
+          <img
+            src={avatar}
+            alt={`${firstName} ${lastName}`}
+            className="avatar"
           />
-        ) : null}
+          <span className="name">
+            {firstName} {lastName}
+          </span>
+        </li>
+        <ContactCard
+          details={this.props.details}
+          index={this.props.index}
+          goToEdit={this.props.goToEdit}
+          state={this.props.state}
+        />
       </React.Fragment>
     );
   }

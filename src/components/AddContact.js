@@ -12,17 +12,23 @@ class AddContact extends Component {
 
   createContact = (addContact, e) => {
     e.preventDefault();
+    const key = Date.now();
+    const avatar =
+      this.avatarRef.value.value !== ""
+        ? this.avatarRef.value.value
+        : "/images/default-user-image-300x300.png";
     const contact = {
       firstName: this.firstNameRef.value.value,
       lastName: this.lastNameRef.value.value,
       email: this.emailRef.value.value,
       phone: this.phoneRef.value.value,
-      avatar: this.avatarRef.value.value,
-      country: this.countryRef.value.value
+      avatar: avatar,
+      country: this.countryRef.value.value,
+      key: key.toString()
     };
     console.log(contact);
 
-    addContact(contact);
+    addContact(contact, key);
 
     e.currentTarget.reset();
 
@@ -45,24 +51,28 @@ class AddContact extends Component {
                   ref={this.firstNameRef}
                   type="text"
                   placeholder="First Name"
+                  required
                 />
                 <input
                   name="lastName"
                   ref={this.lastNameRef}
                   type="text"
                   placeholder="Last Name"
+                  required
                 />
                 <input
                   name="email"
                   ref={this.emailRef}
-                  type="text"
+                  type="email"
                   placeholder="Email"
+                  required
                 />
                 <input
                   name="phone"
                   ref={this.phoneRef}
                   type="text"
                   placeholder="Phone"
+                  required
                 />
                 <input
                   name="avatar"
@@ -70,7 +80,7 @@ class AddContact extends Component {
                   type="text"
                   placeholder="Avatar URL"
                 />
-                <select name="country" ref={this.countryRef}>
+                <select name="country" ref={this.countryRef} required>
                   <option value="none" disabled selected>
                     Select Country
                   </option>
@@ -78,7 +88,7 @@ class AddContact extends Component {
                     <option key={country.name}>{country.name}</option>
                   ))}
                 </select>
-                <button className="submit">Go Baby Go!</button>
+                <button className="submit">Add Contact</button>
               </form>
             </div>
           </React.Fragment>

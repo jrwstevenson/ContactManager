@@ -3,8 +3,13 @@ body {
   color: #706c72;
   background: linear-gradient(to right, #36d1dc, #5b86e5); }
 
+a {
+  text-decoration: none;
+  color: white; }
+
 #app {
-  z-index: 0; }
+  z-index: 0;
+  margin-top: 10vh; }
 
 .content {
   background: #fdfdfd;
@@ -77,8 +82,9 @@ body {
   color: transparent; }
 
 .count {
-  float: right;
-  padding: 2px 15px 2px 0; }
+  position: absolute;
+  top: 28px;
+  left: 315px; }
 
 /* Contacts navigation */
 .contacts-nav ul {
@@ -140,7 +146,7 @@ body {
 
 .contact-list .person {
   position: relative;
-  padding: 12px 0;
+  padding: 10px 0;
   border-bottom: 1px solid rgba(112, 108, 114, 0.3);
   cursor: pointer;
   height: 50px; }
@@ -154,17 +160,23 @@ li .person {
 .person .avatar {
   display: inline-block; }
 
-.person .avatar img {
-  width: 40px;
+.avatar {
+  width: 50px;
   margin-left: 25px;
-  border-radius: 50%; }
+  border-radius: 50%;
+  vertical-align: middle; }
 
-.person .name {
+.name {
+  vertical-align: middle;
   padding: 0 0 0 10px;
   display: inline-block;
   color: #fdfdfd;
-  font-size: 25px;
-  font-weight: 700; }
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 270px; }
 
 /*------------------------------------*\
     Contacts List - Custom Scrollbar
@@ -201,11 +213,11 @@ li .person {
 
 .display #startScreen {
   text-align: center;
-  margin-top: 30vh; }
+  margin-top: 230px; }
 
 .personCard {
   top: 0px;
-  left: 50%;
+  left: 0;
   position: absolute;
   background: #403646;
   width: 50%;
@@ -213,18 +225,54 @@ li .person {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: -1;
-  text-align: center;
-  color: white; }
+  color: white;
+  opacity: 0;
+  transition: all 0.2s ease-in-out; }
+
+.personCard.active {
+  left: 50%;
+  opacity: 1; }
 
 .personCard .avatar {
+  text-align: center;
   width: 100%;
   margin: 0;
   padding: 0; }
 
 .personCard img {
-  width: 100%;
-  max-height: 350px;
-  object-fit: cover; }
+  height: 250px;
+  width: 250px;
+  margin-top: 40px;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid #2b2130;
+  border-radius: 100%;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); }
+
+.personCard h1 {
+  text-align: center;
+  margin: 10px 0; }
+
+.personCard .card-info {
+  padding: 0 50px;
+  list-style: none; }
+
+.personCard .label {
+  color: #999999;
+  float: left;
+  width: 70px; }
+
+.personCard .edit {
+  background-color: #2b2130;
+  color: #bababa;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right; }
+
+.personCard .edit:hover {
+  background-color: #2b213098; }
 
 #contacts {
   overflow: inherit; }
@@ -233,13 +281,15 @@ h1.logo {
   color: #2b2130;
   font-size: 4em;
   margin: 0;
-  text-align: center; }
+  text-align: center;
+  padding-top: 10px; }
 
 .form-box {
   border-radius: 5px;
-  padding: 20px; }
+  padding: 20px 70px; }
 
 .form-box input[type="text"],
+.form-box input[type="email"],
 .form-box select,
 .form-box textarea {
   width: 100%;
@@ -252,15 +302,29 @@ h1.logo {
   resize: vertical; }
 
 .form-box .submit {
-  background-color: #2b2130;
+  color: white;
+  margin-left: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  background-color: #45a049; }
+
+.form-box .submit:hover {
+  background-color: #2b2130; }
+
+.form-box .delete {
+  background-color: #a04545;
   color: white;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
-  cursor: pointer; }
+  cursor: pointer;
+  float: right; }
 
-.form-box .submit:hover {
-  background-color: #45a049; }
+.form-box .delete:hover {
+  background-color: #a72323; }
 
 #notFound {
   background: white;

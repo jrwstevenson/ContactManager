@@ -32,9 +32,6 @@ export class Search extends Component {
                     context.updateSearch(event.currentTarget.value)
                   }
                 />
-                <span className="count">
-                  {Object.keys(context.state.contacts).length}
-                </span>
               </form>
             </div>
           </React.Fragment>

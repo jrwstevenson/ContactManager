@@ -1,48 +1,38 @@
 import React, { Component } from "react";
-import sampleContacts from "./sampleUsers100";
+import sampleContacts from "./sampleUsers";
 
 const Context = React.createContext();
 
 export class Provider extends Component {
   state = {
-    contacts: {
-      JS1: {
-        firstName: "James",
-        lastName: "Stevenson",
-        email: "hello@james.stevenson.com",
-        avatar:
-          "https://en.gravatar.com/userimage/104602539/38dde258892810e45f03a69c4407c6d1.jpg?size=200",
-        phone: "0034 690 282 077",
-        country: "Spain"
-      }
-    },
+    contacts: {},
     search: ""
   };
 
-  saveLocal = state => {
-    state = this.state;
-    localStorage.setItem("Contacts", JSON.stringify(state));
-  };
+  componentDidMount() {
+    const localStorageRef = localStorage.getItem("JS-Contacts-Manger");
+    if (localStorageRef) {
+      this.setState({ contacts: JSON.parse(localStorageRef) });
+    }
+  }
 
-  addContact = contact => {
+  componentDidUpdate() {
+    const state = this.state;
+    localStorage.setItem("JS-Contacts-Manger", JSON.stringify(state.contacts));
+  }
+
+  addContact = (contact, key) => {
     const contacts = { ...this.state.contacts };
-    contacts[`${Date.now()}`] = contact;
+    contacts[key] = contact;
     this.setState({ contacts });
-    this.saveLocal();
-    // console.log(contacts);
   };
 
   editContact = (e, data) => {
     e.preventDefault();
-    // 1. Copy State
     const contacts = { ...this.state.contacts };
-    // 2. update state
     contacts[data.id] = data.contact;
-    // 3. set to state
     this.setState({ contacts });
-
     this.props.children.props.history.push("/");
-    // console.log(this);
   };
 
   deleteContact = id => {
@@ -51,33 +41,23 @@ export class Provider extends Component {
   };
 
   importContacts = () => {
-    // alert("Clicked");
     this.setState({ contacts: sampleContacts });
   };
 
   goToEdit = index => {
     this.props.history.push(`/contact/${index}/edit`);
-    // console.log(index);
-  };
-
-  sayTwat = e => {
-    e.preventDefault();
-    alert("Twat");
   };
 
   updateSearch = searchTerm => {
-    console.log(searchTerm);
     this.setState({ search: searchTerm });
   };
 
   filterContacts = () => {
     const contacts = Object.values(this.state.contacts);
     const search = this.state.search;
-    console.log(contacts);
     const filterItems = contacts.filter(contact => {
       return contact.firstName === search;
     });
-    console.log(`filtered: ${filterItems}`);
     return filterItems;
   };
 

@@ -17,20 +17,45 @@ class ContactCard extends Component {
     } = this.props.details;
     const index = this.props.index;
     return (
-      <div className="personCard">
+      <div
+        className={
+          this.props.state.selections === this.props.index
+            ? "personCard active"
+            : "personCard"
+        }
+      >
         <div className="avatar">
           <img src={avatar} alt={firstName} />
         </div>
         <h1>
           {firstName} {lastName}
         </h1>
-        <p>{email}</p>
-        <p>{phone}</p>
-        <p>{country}</p>
-        <button onClick={() => history.push(`/contact/${index}/edit`)}>
-          Edit
-        </button>
-        {/* <button onClick={() => this.goToEdit(index)}>Edit</button> */}
+        <div className="card-info">
+          <p>
+            <span className="label">Email</span>
+            <a href={`mailto:${email}`}>
+              <span className="data">{email}</span>
+            </a>
+          </p>
+
+          <p>
+            <span className="label">Phone</span>
+            <a href={`tel:${phone}`}>
+              <span className="data">{phone}</span>
+            </a>
+          </p>
+
+          <p>
+            <span className="label">Country</span>
+            <span className="data">{country}</span>
+          </p>
+          <button
+            className="edit"
+            onClick={() => history.push(`/contact/${index}/edit`)}
+          >
+            Edit
+          </button>
+        </div>
       </div>
     );
   }

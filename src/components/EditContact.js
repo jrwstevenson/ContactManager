@@ -13,7 +13,8 @@ class EditContact extends Component {
           email: contact.email,
           avatar: contact.avatar,
           phone: contact.phone,
-          country: contact.country
+          country: contact.country,
+          key: contact.key
         })
       : console.log("Contact Loaded");
   };
@@ -89,7 +90,11 @@ class EditContact extends Component {
                       <option key={country.name}>{country.name}</option>
                     ))}
                   </select>
-                  <button className="submit">Go Baby Go!</button>
+                  <input
+                    type="submit"
+                    className="submit"
+                    value="Update Contact"
+                  />
                 </form>
                 <button
                   className="delete"

@@ -22,22 +22,43 @@ export class Contacts extends Component {
   render() {
     return (
       <Consumer>
-        {context => (
-          <React.Fragment>
-            <ul className="contact-list">
-              {Object.keys(context.state.contacts).map(key => (
-                <Contact
-                  onToggle={this.onChildToggle}
-                  index={key}
-                  key={key}
-                  details={context.state.contacts[key]}
-                  state={this.state}
-                  goToEdit={context.goToEdit}
-                />
-              ))}
-            </ul>
-          </React.Fragment>
-        )}
+        {context => {
+          const contacts = context.state.contacts;
+          const search = context.state.search;
+          const filteredContacts = Object.values(contacts).filter(contact => {
+            return (
+              contact.firstName.toLowerCase().indexOf(search.toLowerCase()) >
+                -1 ||
+              contact.lastName.toLowerCase().indexOf(search.toLowerCase()) > -1
+            );
+          });
+
+          return (
+            <React.Fragment>
+              <span className="count">
+                {Object.keys(filteredContacts).length}
+              </span>
+              <ul className="contact-list">
+                {filteredContacts
+                  .sort(function(a, b) {
+                    if (a.firstName < b.firstName) return -1;
+                    if (a.firstName > b.firstName) return 1;
+                    return 0;
+                  })
+                  .map(contact => (
+                    <Contact
+                      key={contact.key}
+                      index={contact.key}
+                      state={this.state}
+                      goToEdit={context.goToEdit}
+                      onToggle={this.onChildToggle}
+                      details={context.state.contacts[contact.key]}
+                    />
+                  ))}
+              </ul>
+            </React.Fragment>
+          );
+        }}
       </Consumer>
     );
   }
