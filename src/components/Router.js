@@ -11,7 +11,7 @@ class Router extends React.Component {
   render() {
     return (
       <Provider>
-        <BrowserRouter history={history}>
+        <BrowserRouter history={history} basename={process.env.PUBLIC_URL}>
           <div className="content">
             <Switch>
               <Route exact path="/" component={App} />
