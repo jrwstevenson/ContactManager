@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import countryList from "country-list";
-import { Consumer } from "../context";
+import { Consumer } from "../Context";
 
 class AddContact extends Component {
   firstNameRef = React.createRef();
@@ -10,7 +10,7 @@ class AddContact extends Component {
   avatarRef = React.createRef();
   countryRef = React.createRef();
 
-  createContact = (addContact, e) => {
+  createContact = (dispatch, e) => {
     e.preventDefault();
     const key = Date.now();
     const avatar =
@@ -28,7 +28,8 @@ class AddContact extends Component {
     };
     console.log(contact);
 
-    addContact(contact, key);
+    // addContact(contact, key);
+    dispatch({ type: "ADD_CONTACT", payload: contact });
 
     e.currentTarget.reset();
 
@@ -37,62 +38,64 @@ class AddContact extends Component {
 
   render() {
     const countries = countryList().getData();
+
     return (
       <Consumer>
-        {context => (
-          <React.Fragment>
-            <h1 className="logo">Add Contact</h1>
-            <div className="form-box">
-              <form
-                onSubmit={this.createContact.bind(this, context.addContact)}
-              >
-                <input
-                  name="firstName"
-                  ref={this.firstNameRef}
-                  type="text"
-                  placeholder="First Name"
-                  required
-                />
-                <input
-                  name="lastName"
-                  ref={this.lastNameRef}
-                  type="text"
-                  placeholder="Last Name"
-                  required
-                />
-                <input
-                  name="email"
-                  ref={this.emailRef}
-                  type="email"
-                  placeholder="Email"
-                  required
-                />
-                <input
-                  name="phone"
-                  ref={this.phoneRef}
-                  type="text"
-                  placeholder="Phone"
-                  required
-                />
-                <input
-                  name="avatar"
-                  ref={this.avatarRef}
-                  type="text"
-                  placeholder="Avatar URL"
-                />
-                <select name="country" ref={this.countryRef} required>
-                  <option value="none" disabled selected>
-                    Select Country
-                  </option>
-                  {countries.map(country => (
-                    <option key={country.name}>{country.name}</option>
-                  ))}
-                </select>
-                <button className="submit">Add Contact</button>
-              </form>
-            </div>
-          </React.Fragment>
-        )}
+        {context => {
+          const dispatch = context.state.dispatch;
+          return (
+            <React.Fragment>
+              <h1 className="logo">Add Contact</h1>
+              <div className="form-box">
+                <form onSubmit={this.createContact.bind(this, dispatch)}>
+                  <input
+                    name="firstName"
+                    ref={this.firstNameRef}
+                    type="text"
+                    placeholder="First Name"
+                    required
+                  />
+                  <input
+                    name="lastName"
+                    ref={this.lastNameRef}
+                    type="text"
+                    placeholder="Last Name"
+                    required
+                  />
+                  <input
+                    name="email"
+                    ref={this.emailRef}
+                    type="email"
+                    placeholder="Email"
+                    required
+                  />
+                  <input
+                    name="phone"
+                    ref={this.phoneRef}
+                    type="text"
+                    placeholder="Phone"
+                    required
+                  />
+                  <input
+                    name="avatar"
+                    ref={this.avatarRef}
+                    type="text"
+                    placeholder="Avatar URL"
+                  />
+                  <select name="country" ref={this.countryRef} required>
+                    <option value="none" disabled selected>
+                      Select Country
+                    </option>
+                    {countries.map(country => (
+                      <option key={country.name}>{country.name}</option>
+                    ))}
+                  </select>
+                  <button className="submit">Add Contact</button>
+                </form>
+              </div>
+            </React.Fragment>
+          );
+        }}
       </Consumer>
     );
   }

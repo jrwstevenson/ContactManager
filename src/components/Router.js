@@ -4,7 +4,7 @@ import App from "./App";
 import AddContact from "./AddContact";
 import EditContact from "./EditContact";
 import NotFound from "./NotFound";
-import { Provider } from "../context";
+import { Provider } from "../Context";
 import history from "./History";
 
 class Router extends React.Component {

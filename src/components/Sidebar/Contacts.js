@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Contact from "./Contact";
-import { Consumer } from "../../context";
+import { Consumer } from "../../Context";
 
 export class Contacts extends Component {
   state = {
@@ -25,7 +25,7 @@ export class Contacts extends Component {
         {context => {
           const contacts = context.state.contacts;
           const search = context.state.search;
-          const filteredContacts = Object.values(contacts).filter(contact => {
+          const filteredContacts = contacts.filter(contact => {
             return (
               contact.firstName.toLowerCase().indexOf(search.toLowerCase()) >
                 -1 ||
@@ -52,7 +52,7 @@ export class Contacts extends Component {
                       state={this.state}
                       goToEdit={context.goToEdit}
                       onToggle={this.onChildToggle}
-                      details={context.state.contacts[contact.key]}
+                      details={contact}
                     />
                   ))}
               </ul>

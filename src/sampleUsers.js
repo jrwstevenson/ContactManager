@@ -1,5 +1,5 @@
-const sampleContacts = {
-  JS1: {
+const sampleContacts = [
+  {
     key: "JS1",
     firstName: "James",
     lastName: "Stevenson",
@@ -8,7 +8,7 @@ const sampleContacts = {
     phone: "0034 690 282 077",
     country: "Spain"
   },
-  id1: {
+  {
     key: "id1",
     firstName: "Leanne",
     lastName: "Graham",
@@ -17,7 +17,7 @@ const sampleContacts = {
     phone: "1-770-736-8031 x56442",
     country: "Spain"
   },
-  id2: {
+  {
     key: "id2",
     firstName: "Ervin",
     lastName: "Howell",
@@ -26,7 +26,7 @@ const sampleContacts = {
     phone: "010-692-6593 x09125",
     country: "Spain"
   },
-  id3: {
+  {
     key: "id3",
     firstName: "Clementine",
     lastName: "Bauch",
@@ -35,7 +35,7 @@ const sampleContacts = {
     phone: "1-463-123-4447",
     country: "Spain"
   },
-  id4: {
+  {
     key: "id4",
     firstName: "Patricia",
     lastName: "Lebsack",
@@ -44,7 +44,7 @@ const sampleContacts = {
     phone: "493-170-9623 x156",
     country: "Spain"
   },
-  id5: {
+  {
     key: "id5",
     firstName: "Chelsey",
     lastName: "Dietrich",
@@ -53,7 +53,7 @@ const sampleContacts = {
     phone: "(254)954-1289",
     country: "Spain"
   },
-  id6: {
+  {
     key: "id6",
     firstName: "Dennis",
     lastName: "Schulist",
@@ -62,7 +62,7 @@ const sampleContacts = {
     phone: "1-477-935-8478 x6430",
     country: "Spain"
   },
-  id7: {
+  {
     key: "id7",
     firstName: "Kurtis",
     lastName: "Weissnat",
@@ -71,7 +71,7 @@ const sampleContacts = {
     phone: "210.067.6132",
     country: "Spain"
   },
-  id8: {
+  {
     key: "id8",
     firstName: "Nicholas",
     lastName: "Runolfsdottir V",
@@ -80,7 +80,7 @@ const sampleContacts = {
     phone: "586.493.6943 x140",
     country: "Spain"
   },
-  id9: {
+  {
     key: "id9",
     firstName: "Glenna",
     lastName: "Reichert",
@@ -89,7 +89,7 @@ const sampleContacts = {
     phone: "(775)976-6794 x41206",
     country: "Spain"
   },
-  id10: {
+  {
     key: "id10",
     firstName: "Clementina",
     lastName: "DuBuque",
@@ -98,5 +98,5 @@ const sampleContacts = {
     phone: "024-648-3804",
     country: "Spain"
   }
-};
+];
 export default sampleContacts;

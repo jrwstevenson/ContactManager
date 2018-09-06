@@ -3,10 +3,41 @@ import sampleContacts from "./sampleUsers";
 
 const Context = React.createContext();
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "DELETE_CONTACT":
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          contact => contact.key !== action.payload
+        )
+      };
+    case "ADD_CONTACT":
+      return {
+        ...state,
+        contacts: [action.payload, ...state.contacts]
+      };
+
+    case "UPDATE_CONTACT":
+      return {
+        ...state,
+        contacts: state.contacts.map(
+          contact =>
+            contact.key === action.payload.key
+              ? (contact = action.payload)
+              : contact
+        )
+      };
+    default:
+      return state;
+  }
+};
+
 export class Provider extends Component {
   state = {
-    contacts: {},
-    search: ""
+    contacts: [],
+    search: "",
+    dispatch: action => this.setState(state => reducer(state, action))
   };
 
   componentDidMount() {

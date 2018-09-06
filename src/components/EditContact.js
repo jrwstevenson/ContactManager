@@ -1,25 +1,46 @@
 import React, { Component } from "react";
 import countryList from "country-list";
-import { Consumer } from "../context";
+import { Consumer } from "../Context";
 
 class EditContact extends Component {
   state = {};
 
-  getContact = contact => {
-    Object.keys(this.state).length === 0
-      ? this.setState({
-          firstName: contact.firstName,
-          lastName: contact.lastName,
-          email: contact.email,
-          avatar: contact.avatar,
-          phone: contact.phone,
-          country: contact.country,
-          key: contact.key
-        })
+  getContact = (state, id) => {
+    const contact = state.contacts.find(c => c.key === id);
+    Object.keys(this.state).length === 0 && contact !== undefined
+      ? this.setTheState(contact)
       : console.log("Contact Loaded");
   };
 
+  setTheState = contact => {
+    console.log(contact);
+    this.setState({
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      email: contact.email,
+      avatar: contact.avatar,
+      phone: contact.phone,
+      country: contact.country,
+      key: contact.key
+    });
+  };
+
+  deleteContact = (id, dispatch) => {
+    dispatch({ type: "DELETE_CONTACT", payload: id });
+    this.props.history.push("/");
+  };
+
   onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  onSubmit = (dispatch, e) => {
+    e.preventDefault();
+
+    const updatedContact = this.state;
+
+    dispatch({ type: "UPDATE_CONTACT", payload: updatedContact });
+
+    this.props.history.push("/");
+  };
 
   render() {
     const countries = countryList().getData();
@@ -28,21 +49,15 @@ class EditContact extends Component {
       <Consumer>
         {context => {
           const { id } = this.props.match.params;
+          this.getContact(context.state, id);
 
-          this.getContact(context.state.contacts[id]);
+          const dispatch = context.state.dispatch;
 
           return (
             <React.Fragment>
               <h1 className="logo">Edit Contact</h1>
               <div className="form-box">
-                <form
-                  onSubmit={e =>
-                    context.editContact(e, {
-                      id: id,
-                      contact: this.state
-                    })
-                  }
-                >
+                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                   <input
                     name="firstName"
                     value={this.state.firstName}
@@ -98,7 +113,7 @@ class EditContact extends Component {
                 </form>
                 <button
                   className="delete"
-                  onClick={() => context.deleteContact(id)}
+                  onClick={this.deleteContact.bind(this, id, dispatch)}
                 >
                   Delete
                 </button>

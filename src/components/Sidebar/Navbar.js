@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Consumer } from "../../context";
+import { Consumer } from "../../Context";
 import history from "../History";
 
 class Navbar extends Component {
