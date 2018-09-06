@@ -1,3 +1,21 @@
+# SPA Contact Manager
+
+[Working example](https://contacts.james-stevenson.com) can be found here.
+
+For this coding challenge I chose to use React with the Context API. Redux could easily be implemented for a larger app.
+
+Webpack and Babel configurations are courtesy of Create React App.
+
+I have used Sass as the CSS preprocessor.
+
+Data is persisted by utilizing the browsers local storage.
+
+### Extra features
+
+1. Sample data can be loaded to give 11 examples.
+1. Search facility.
+1. Fields for Avatar and Phone Number.
+
 # The Gaming Innovation Group JavaScript Challenge
 
 ## Client Side Address Book
